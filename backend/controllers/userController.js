@@ -15,6 +15,7 @@ export async function authUser(req, res) {
         _id: user._id,
         name: user.name,
         email: user.email,
+        imageUrl: user.imageUrl,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
       })
@@ -31,30 +32,53 @@ export async function authUser(req, res) {
 // @access  Public
 export async function registerUser(req, res) {
   const { name, email, password } = req.body
-
   try {
-    const userExist = await User.findOne({ email })
-
-    if (userExist) {
-      return res.status(400).json({ message: 'User already exist' })
+    const emailExist = await User.findOne({ email })
+    const nameExist = await User.findOne({ name })
+    if (emailExist) {
+      return res
+        .status(400)
+        .json({ message: 'User with this email already exist' })
     }
-
+    if (nameExist) {
+      return res
+        .status(400)
+        .json({ message: 'User with this username already exist' })
+    }
     const user = await User.create({
       name,
       email,
       password,
     })
-
     if (user) {
       res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
+        imageUrl: user.imageUrl,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
       })
     } else {
       res.status(400).json({ message: 'Invalid user data' })
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+// @desc    Delete user
+// @route   DEL /api/users/delete
+// @access  Private
+export async function deleteUser(req, res) {
+  try {
+    const user = await User.findById(req.user._id)
+
+    if (user) {
+      await user.remove()
+      res.json({ message: 'User removed' })
+    } else {
+      res.status(404).json({ message: 'User not found' })
     }
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -73,6 +97,7 @@ export async function getUserProfile(req, res) {
         _id: user._id,
         name: user.name,
         email: user.email,
+        imageUrl: user.imageUrl,
         isAdmin: user.isAdmin,
       })
     } else {
@@ -93,6 +118,7 @@ export async function updateUserProfile(req, res) {
     if (user) {
       user.name = req.body.name || user.name
       user.email = req.body.email || user.email
+      user.imageUrl = req.body.imageUrl || user.imageUrl
       if (req.body.password) {
         user.password = req.body.password
       }
@@ -103,6 +129,7 @@ export async function updateUserProfile(req, res) {
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
+        imageUrl: updatedUser.imageUrl,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser._id),
       })

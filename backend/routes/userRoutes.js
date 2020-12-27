@@ -2,6 +2,7 @@ import express from 'express'
 import {
   authUser,
   registerUser,
+  deleteUser,
   getUserProfile,
   updateUserProfile,
 } from '../controllers/userController.js'
@@ -15,5 +16,6 @@ router
   .route('/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile)
+router.route('/delete').delete(protect, deleteUser)
 
 export default router
