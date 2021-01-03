@@ -8,6 +8,7 @@ import multer from 'multer'
 import checkFileType from './backend/utils/checkFileType.js'
 
 import userRoutes from './backend/routes/userRoutes.js'
+import itemRoutes from './backend/routes/itemRoutes.js'
 
 dotenv.config()
 
@@ -24,6 +25,7 @@ app.use(express.json())
 
 // Routing
 app.use('/api/users', userRoutes)
+app.use('/api/items', itemRoutes)
 
 // Multer file upload
 const storage = multer.diskStorage({
@@ -49,10 +51,24 @@ app.post('/api/upload', upload, (req, res) => {
   res.send(`/${req.file.path}`)
 })
 
-// Static folder for uploads
+// Static folder for uploaded documents
 const __dirname = dirname()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+// Production settings
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....')
+  })
+}
+
+// Server initialization
 const PORT = process.env.PORT || 5000
 app.listen(
   PORT,

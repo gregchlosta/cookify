@@ -8,6 +8,15 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers'
+import {
+  itemCommentCreateReducer,
+  itemCreateReducer,
+  itemUpdateReducer,
+  itemDeleteReducer,
+  itemDetailsReducer,
+  itemLikeReducer,
+  itemsListReducer,
+} from './reducers/itemReducers'
 
 // Please add reducers here
 const reducer = combineReducers({
@@ -16,6 +25,13 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  itemsList: itemsListReducer,
+  itemDetails: itemDetailsReducer,
+  itemCreate: itemCreateReducer,
+  itemUpdate: itemUpdateReducer,
+  itemDelete: itemDeleteReducer,
+  itemLike: itemLikeReducer,
+  itemCommentCreate: itemCommentCreateReducer,
 })
 
 const userAuthFromStorage = localStorage.getItem('userAuth')

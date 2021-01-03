@@ -68,7 +68,7 @@ export default function RegisterScreen({ history }) {
             <Loader />
           ) : (
             <Form onSubmit={handleSubmit}>
-              <Heading>Log in to Cookify</Heading>
+              <Heading>Sign up to Cookify</Heading>
 
               <Label>Username</Label>
               <Input

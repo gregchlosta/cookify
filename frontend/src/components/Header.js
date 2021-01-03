@@ -23,7 +23,7 @@ export default function Header() {
         {userAuth ? (
           <ActionsContainer>
             <UserMenu userAuth={userAuth} handleLogout={handleLogout} />
-            <Button as={Link} to='/add-recipe'>
+            <Button as={Link} to='/add'>
               Upload Recipe!
             </Button>
           </ActionsContainer>

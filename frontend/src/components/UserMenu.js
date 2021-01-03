@@ -21,13 +21,13 @@ export default function UserMenu({ userAuth, handleLogout }) {
         <DropDownListContainer>
           <DropDownList>
             <ListItem>
-              <ItemLink to='/my-recipes'>
+              <ItemLink to='/my'>
                 <FaCookieBite size='1.4rem' color='gray' />
                 <TitleWraper>My Recipes</TitleWraper>
               </ItemLink>
             </ListItem>
             <ListItem>
-              <ItemLink to='/recipe-favorite'>
+              <ItemLink to='/favorite'>
                 <FaHeart size='1.4rem' color='pink' />
                 <TitleWraper>Favorite</TitleWraper>
               </ItemLink>
@@ -61,6 +61,7 @@ const DropDownHeader = styled('div')`
 const DropDownListContainer = styled('div')`
   position: absolute;
   top: 80px;
+  right: 30px;
 `
 
 const DropDownList = styled('ul')`

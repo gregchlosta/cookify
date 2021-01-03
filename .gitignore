@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules
+uploads
 /frontend/node_modules
 /.pnp
 .pnp.js
@@ -25,3 +26,4 @@ yarn-debug.log*
 yarn-error.log*
 .vscode/settings.json
 /frontend/.eslintcache
+/frontend/.debug.log

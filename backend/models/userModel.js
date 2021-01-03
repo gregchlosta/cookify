@@ -6,8 +6,11 @@ const userSchema = mongoose.Schema(
     name: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    imageUrl: { type: String, required: true, default: '/img/default.png' },
-    isAdmin: { type: Boolean, required: true, default: false },
+    imageUrl: {
+      type: String,
+      required: true,
+      default: '/img/user-default.png',
+    },
   },
   { timestamps: true }
 )

@@ -10,7 +10,7 @@ export const FullScreenContainer = styled.div`
   margin: auto;
   padding: 0 2rem;
   margin-top: 3rem;
-  max-width: 900px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
 `

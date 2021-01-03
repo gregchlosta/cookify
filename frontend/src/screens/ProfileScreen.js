@@ -45,7 +45,7 @@ export default function ProfileScreen({ history }) {
       history.push('/login')
     } else {
       setMessage('')
-      dispatch(getUserDetails(userAuth))
+      dispatch(getUserDetails())
     }
   }, [dispatch, history, userAuth])
 
@@ -78,7 +78,7 @@ export default function ProfileScreen({ history }) {
       setImageUrl(data)
 
       dispatch(
-        updateUserProfile(userAuth, {
+        updateUserProfile({
           id: userInfo._id,
           imageUrl: data,
         })
@@ -97,7 +97,7 @@ export default function ProfileScreen({ history }) {
       setMessage('Passwords do not match')
     } else {
       dispatch(
-        updateUserProfile(userAuth, {
+        updateUserProfile({
           id: userInfo._id,
           name,
           email,
@@ -113,7 +113,7 @@ export default function ProfileScreen({ history }) {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      dispatch(deleteUser(userAuth))
+      dispatch(deleteUser())
     }
   }
 

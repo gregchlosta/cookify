@@ -91,7 +91,6 @@ export async function deleteUser(req, res) {
 export async function getUserProfile(req, res) {
   try {
     const user = await User.findById(req.user._id)
-
     if (user) {
       res.json({
         _id: user._id,
@@ -132,6 +131,26 @@ export async function updateUserProfile(req, res) {
         imageUrl: updatedUser.imageUrl,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser._id),
+      })
+    } else {
+      res.status(404).json({ message: 'User not found' })
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+// @desc    Get user name and image url
+// @route   GET /api/users/:id
+// @access  Public
+export async function getUserNameAndPhoto(req, res) {
+  try {
+    const user = await User.findById(req.params.id)
+
+    if (user) {
+      res.json({
+        name: user.name,
+        imageUrl: user.imageUrl,
       })
     } else {
       res.status(404).json({ message: 'User not found' })
