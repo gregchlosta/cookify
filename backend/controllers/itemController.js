@@ -1,9 +1,9 @@
-import Item from '../models/itemModel.js'
+const Item = require('../models/itemModel')
 
 // @desc    Fetch all items
 // @route   GET /api/items
 // @access  Public
-export async function getItems(req, res) {
+async function getItems(req, res) {
   const keyword = req.query.keyword
     ? {
         title: {
@@ -33,7 +33,7 @@ export async function getItems(req, res) {
 // @desc    Get looged in user items
 // @route   GET /api/items/my
 // @access  Private
-export async function getMyItems(req, res) {
+async function getMyItems(req, res) {
   try {
     const items = await Item.find({ userId: req.user._id })
     res.json(items)
@@ -45,7 +45,7 @@ export async function getMyItems(req, res) {
 // @desc    Get looged in user favorite items
 // @route   GET /api/items/favorite
 // @access  Private
-export async function getMyFavoriteItems(req, res) {
+async function getMyFavoriteItems(req, res) {
   const keyword = req.query.keyword
     ? {
         title: {
@@ -76,7 +76,7 @@ export async function getMyFavoriteItems(req, res) {
 // @desc    Fetch single item
 // @route   GET /api/items/:id
 // @access  Public
-export async function getItemById(req, res) {
+async function getItemById(req, res) {
   try {
     const item = await Item.findById(req.params.id)
     if (item) {
@@ -92,7 +92,7 @@ export async function getItemById(req, res) {
 // @desc    Delete a product
 // @route   DELETE /api/items/:id
 // @access  Private
-export async function deleteItem(req, res) {
+async function deleteItem(req, res) {
   try {
     const item = await Item.findById(req.params.id)
     if (item) {
@@ -109,7 +109,7 @@ export async function deleteItem(req, res) {
 // @desc    Create a item
 // @route   POST /api/items
 // @access  Private
-export async function createItem(req, res) {
+async function createItem(req, res) {
   const {
     title,
     imageUrl,
@@ -144,7 +144,7 @@ export async function createItem(req, res) {
 // @desc    Update a item
 // @route   PUT /api/items/:id
 // @access  Private
-export async function updateItem(req, res) {
+async function updateItem(req, res) {
   const {
     title,
     imageUrl,
@@ -159,6 +159,8 @@ export async function updateItem(req, res) {
     const item = await Item.findById(req.params.id)
 
     if (item) {
+      item.userName = req.user.name
+      item.userImageUrl = req.user.imageUrl
       item.title = title
       item.imageUrl = imageUrl
       item.servings = servings
@@ -180,7 +182,7 @@ export async function updateItem(req, res) {
 // @desc    like a item
 // @route   POST /api/items
 // @access  Private
-export async function likeItem(req, res) {
+async function likeItem(req, res) {
   try {
     const item = await Item.findById(req.params.id)
 
@@ -204,7 +206,7 @@ export async function likeItem(req, res) {
 // @desc    Create new comment
 // @route   POST /api/items/comment/:id
 // @access  Private
-export async function createComment(req, res) {
+async function createComment(req, res) {
   const { text } = req.body
 
   try {
@@ -227,4 +229,16 @@ export async function createComment(req, res) {
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
+}
+
+module.exports = {
+  getItems,
+  getItemById,
+  getMyFavoriteItems,
+  getMyItems,
+  deleteItem,
+  createItem,
+  updateItem,
+  likeItem,
+  createComment,
 }

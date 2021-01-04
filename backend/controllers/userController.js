@@ -1,10 +1,11 @@
-import User from '../models/userModel.js'
-import generateToken from '../utils/generateToken.js'
+const User = require('../models/userModel')
+const generateToken = require('../utils/generateToken')
+const cloudinary = require('../config/cloadinary')
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
-export async function authUser(req, res) {
+async function authUser(req, res) {
   const { email, password } = req.body
 
   try {
@@ -30,7 +31,7 @@ export async function authUser(req, res) {
 // @desc    Register a new user
 // @route   POST /api/users/
 // @access  Public
-export async function registerUser(req, res) {
+async function registerUser(req, res) {
   const { name, email, password } = req.body
   try {
     const emailExist = await User.findOne({ email })
@@ -70,7 +71,7 @@ export async function registerUser(req, res) {
 // @desc    Delete user
 // @route   DEL /api/users/delete
 // @access  Private
-export async function deleteUser(req, res) {
+async function deleteUser(req, res) {
   try {
     const user = await User.findById(req.user._id)
 
@@ -88,7 +89,7 @@ export async function deleteUser(req, res) {
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
-export async function getUserProfile(req, res) {
+async function getUserProfile(req, res) {
   try {
     const user = await User.findById(req.user._id)
     if (user) {
@@ -110,7 +111,7 @@ export async function getUserProfile(req, res) {
 // @desc    Update user profile
 // @route   POST /api/users/profile
 // @access  Private
-export async function updateUserProfile(req, res) {
+async function updateUserProfile(req, res) {
   try {
     const user = await User.findById(req.user._id)
 
@@ -140,22 +141,10 @@ export async function updateUserProfile(req, res) {
   }
 }
 
-// @desc    Get user name and image url
-// @route   GET /api/users/:id
-// @access  Public
-export async function getUserNameAndPhoto(req, res) {
-  try {
-    const user = await User.findById(req.params.id)
-
-    if (user) {
-      res.json({
-        name: user.name,
-        imageUrl: user.imageUrl,
-      })
-    } else {
-      res.status(404).json({ message: 'User not found' })
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
+module.exports = {
+  authUser,
+  registerUser,
+  deleteUser,
+  getUserProfile,
+  updateUserProfile,
 }

@@ -1,5 +1,5 @@
-import express from 'express'
-import {
+const express = require('express')
+const {
   getItems,
   getItemById,
   createItem,
@@ -9,8 +9,8 @@ import {
   getMyFavoriteItems,
   deleteItem,
   updateItem,
-} from '../controllers/itemController.js'
-import { protect } from '../middleware/authMiddleware.js'
+} = require('../controllers/itemController')
+const protect = require('../middleware/authMiddleware')
 
 const router = express.Router()
 
@@ -25,4 +25,4 @@ router
 router.route('/like/:id').post(protect, likeItem)
 router.route('/comment/:id').post(protect, createComment)
 
-export default router
+module.exports = router

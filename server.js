@@ -1,14 +1,13 @@
-import path from 'path'
-import dirname from 'es-dirname'
-import express from 'express'
-import connectDB from './backend/config/db.js'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
-import multer from 'multer'
-import checkFileType from './backend/utils/checkFileType.js'
+const path = require('path')
+const express = require('express')
+const connectDB = require('./backend/config/db')
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const multer = require('./backend/config/multer')
+const cloudinary = require('./backend/config/cloadinary')
 
-import userRoutes from './backend/routes/userRoutes.js'
-import itemRoutes from './backend/routes/itemRoutes.js'
+const userRoutes = require('./backend/routes/userRoutes')
+const itemRoutes = require('./backend/routes/itemRoutes')
 
 dotenv.config()
 
@@ -27,33 +26,14 @@ app.use(express.json())
 app.use('/api/users', userRoutes)
 app.use('/api/items', itemRoutes)
 
-// Multer file upload
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    )
-  },
+app.post('/api/upload', multer.single('image'), async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path)
+    res.send(result.secure_url)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
 })
-
-const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
-  },
-}).single('image')
-
-app.post('/api/upload', upload, (req, res) => {
-  res.send(`/${req.file.path}`)
-})
-
-// Static folder for uploaded documents
-const __dirname = dirname()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // Production settings
 if (process.env.NODE_ENV === 'production') {

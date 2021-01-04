@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const commentSchema = mongoose.Schema(
   {
@@ -70,4 +70,4 @@ const itemSchema = mongoose.Schema(
 
 const Item = mongoose.model('Items', itemSchema)
 
-export default Item
+module.exports = Item

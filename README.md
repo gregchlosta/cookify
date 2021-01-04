@@ -1,6 +1,6 @@
 # Cookify
 
-> Cooking app built with the MERN stack, Redux and Styled-Components.
+> Cooking app built with the MERN stack, Redux, Styled-Components, JWT, Multer, Cloudinary.
 
 Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 
@@ -13,14 +13,6 @@ Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 - Filter recipies by categories
 - List user's recipes, and user's favorite recipies
 
-### ES Modules in Node
-
-We us ECMAScript Modules in the backend in this project. Be sure to have at least Node v14.6+ or you will need to add the "--experimental-modules" flag.
-
-Also, when importing a file (not a package), be sure to add .js at the end or you will get a "module not found" error
-
-You can also install and setup Babel if you would like
-
 ### Env Variables
 
 Create a .env file in then root and add the following
@@ -30,6 +22,9 @@ NODE_ENV = development
 PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
+CLOUDINARY_API_KEY = your cloudinary api key
+CLOUDINARY_API_SECRET = your cloudinary api secret
+CLOUDINARY_NAME = your cloudinary cloud name
 ```
 
 ### Install Dependencies (frontend & backend)
