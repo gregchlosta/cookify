@@ -7,8 +7,10 @@ Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 ## Features
 
 - Full user authnetication and authorization with JWT
-- User profile with image upload.
+- User profile update with image upload.
 - Create, read, update and delete recipe (CRUD)
+- Add and remove recipe likes
+- Comment recipes
 - Search recipies by keyword
 - Filter recipies by categories
 - List user's recipes, and user's favorite recipies

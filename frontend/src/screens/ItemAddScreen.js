@@ -288,7 +288,8 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  object-fit: scale-down;
+  height: 100%;
+  object-fit: cover;
   border-radius: 5px;
 `
 const Postfix = styled.span`
