@@ -66,7 +66,8 @@ const LineContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   min-width: 70px;
-  object-fit: scale-down;
+  height: 50px;
+  object-fit: cover;
   overflow: hidden;
   border-radius: 0.4rem;
 `

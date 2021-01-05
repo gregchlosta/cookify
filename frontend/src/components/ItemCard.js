@@ -78,9 +78,10 @@ const CardContainer = styled.div`
 `
 const Image = styled.img`
   width: 100%;
-  max-height: 290px;
-  object-fit: scale-down;
+  height: 290px;
+  object-fit: cover;
   overflow: hidden;
+  border-radius: 10px;
 `
 const DetailContainer = styled.div`
   display: flex;

@@ -160,7 +160,9 @@ const ImageContainer = styled.div`
 `
 const Image = styled.img`
   width: 100%;
-  object-fit: scale-down;
+  object-fit: cover;
+  max-height: 500px;
+
   border-radius: 0.5rem;
 `
 const BadgesContainer = styled.div`
