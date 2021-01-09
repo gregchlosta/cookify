@@ -62,6 +62,10 @@ const DropDownListContainer = styled('div')`
   position: absolute;
   top: 80px;
   right: 30px;
+
+  @media (max-width: 400px) {
+    top: 150px;
+  }
 `
 
 const DropDownList = styled('ul')`

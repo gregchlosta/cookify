@@ -48,6 +48,10 @@ const HeaderContainer = styled.div`
   width: 100vw;
   background: ${(props) => props.theme.white};
   height: 80px;
+
+  @media (max-width: 400px) {
+    height: 150px;
+  }
 `
 
 const Navbar = styled.nav`
@@ -56,6 +60,10 @@ const Navbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `
 
 const ActionsContainer = styled.div`

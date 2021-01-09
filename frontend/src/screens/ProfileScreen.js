@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -128,7 +129,7 @@ export default function ProfileScreen({ history }) {
             ) : (
               <WideWraper>
                 <UserImage profileImage={imageUrl} size='6rem' />
-                <input name='image' type='file' onChange={handleUpload} />
+                <FileInput name='image' type='file' onChange={handleUpload} />
               </WideWraper>
             )}
 
@@ -190,3 +191,8 @@ export default function ProfileScreen({ history }) {
     </>
   )
 }
+
+export const FileInput = styled.input`
+  padding: 1rem;
+  max-width: 230px;
+`

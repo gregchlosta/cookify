@@ -13,6 +13,10 @@ export const FullScreenContainer = styled.div`
   max-width: 1000px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 400px) {
+    margin-top: 0.5rem;
+  }
 `
 
 export const LeftContainer = styled.div`
@@ -103,9 +107,13 @@ export const Wraper = styled.div`
 
 export const WideWraper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin: 2rem 1rem;
+  margin: 2rem 0;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `
 
 export const Message = styled.p`
