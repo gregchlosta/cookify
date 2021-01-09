@@ -3,8 +3,6 @@ const express = require('express')
 const connectDB = require('./backend/config/db')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
-const multer = require('./backend/config/multer')
-const cloudinary = require('./backend/config/cloadinary')
 
 const userRoutes = require('./backend/routes/userRoutes')
 const itemRoutes = require('./backend/routes/itemRoutes')
@@ -25,15 +23,6 @@ app.use(express.json())
 // Routing
 app.use('/api/users', userRoutes)
 app.use('/api/items', itemRoutes)
-
-app.post('/api/upload', multer.single('image'), async (req, res) => {
-  try {
-    const result = await cloudinary.uploader.upload(req.file.path)
-    res.send(result.secure_url)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-})
 
 // Production settings
 if (process.env.NODE_ENV === 'production') {

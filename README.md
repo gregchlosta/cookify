@@ -1,6 +1,6 @@
 # Cookify
 
-> Cooking app built with the MERN stack, Redux, Styled-Components, JWT, Multer, Cloudinary.
+> Cooking app built with the MERN stack, Redux, Styled-Components, JWT, Cloudinary.
 
 Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 
@@ -17,16 +17,19 @@ Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 
 ### Env Variables
 
-Create a .env file in then root and add the following
+Create a .env file in root folder and add the following
 
 ```
 NODE_ENV = development
 PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
-CLOUDINARY_API_KEY = your cloudinary api key
-CLOUDINARY_API_SECRET = your cloudinary api secret
-CLOUDINARY_NAME = your cloudinary cloud name
+```
+
+Create a .env file in frontend and add the following
+
+```
+REACT_APP_CLOUDINARY_NAME = your cloudinary cloud name
 ```
 
 ### Install Dependencies (frontend & backend)

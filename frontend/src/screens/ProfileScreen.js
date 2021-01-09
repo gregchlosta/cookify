@@ -62,33 +62,30 @@ export default function ProfileScreen({ history }) {
     e.preventDefault()
     const file = e.target.files[0]
     const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'z145tixo')
 
-    formData.append('image', file)
     setUploading(true)
 
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      const { data } = await axios.post(
+        'https://api.cloudinary.com/v1_1/drw9zhqip/upload',
+        formData
+      )
 
-      const { data } = await axios.post('/api/upload', formData, config)
-
-      setImageUrl(data)
+      setImageUrl(data.secure_url)
 
       dispatch(
         updateUserProfile({
           id: userInfo._id,
-          imageUrl: data,
+          imageUrl: data.secure_url,
         })
       )
-
-      setUploading(false)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       setUploading(false)
     }
+    setUploading(false)
   }
 
   function handleSubmit(e) {

@@ -1,6 +1,5 @@
 const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
-const cloudinary = require('../config/cloadinary')
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login

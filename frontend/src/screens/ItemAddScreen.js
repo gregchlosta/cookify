@@ -84,25 +84,23 @@ export default function ItemAddScreen({ history, match }) {
 
   async function handleUpload(file) {
     const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'z145tixo')
 
-    formData.append('image', file)
     setUploading(true)
 
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+      const { data } = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/upload`,
+        formData
+      )
 
-      const { data } = await axios.post('/api/upload', formData, config)
-
-      setImageUrl(data)
-      setUploading(false)
+      setImageUrl(data.secure_url)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       setUploading(false)
     }
+    setUploading(false)
   }
 
   function handleCategoryChange(value) {
