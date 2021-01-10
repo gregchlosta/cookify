@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../actions/userActions'
+import { resetPassword } from '../actions/userActions'
 import { ReactComponent as Loader } from '../assets/spiner-white.svg'
 import { Button } from '../styles/buttons'
 import {
@@ -20,16 +20,17 @@ import {
   Message,
   StyledLink,
   StyledParagraph,
-  LabelWraper,
 } from '../styles/userForms'
 
 export default function LoginScreen({ history }) {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
 
-  const { loading, error, userAuth } = useSelector((state) => state.userLogin)
+  const { userAuth } = useSelector((state) => state.userLogin)
+  const { loading, error, success } = useSelector(
+    (state) => state.userResetPassword
+  )
 
   useEffect(() => {
     if (userAuth) {
@@ -39,7 +40,7 @@ export default function LoginScreen({ history }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(login(email, password))
+    dispatch(resetPassword(email))
   }
 
   return (
@@ -59,7 +60,7 @@ export default function LoginScreen({ history }) {
             <Loader />
           ) : (
             <Form onSubmit={handleSubmit}>
-              <Heading>Log in to Cookify</Heading>
+              <Heading>Reset your password</Heading>
               <Label>Email Address</Label>
               <Input
                 white
@@ -69,24 +70,12 @@ export default function LoginScreen({ history }) {
                 required
               />
 
-              <LabelWraper>
-                <Label>Password</Label>
-                <StyledLink to='/reset'>Forgot password?</StyledLink>
-              </LabelWraper>
-              <Input
-                white
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-
               <Wraper>
                 {error && <Message>{error}</Message>}
-                <Button>Log In</Button>
+                {success && <Message success>{success.message}</Message>}
+                <Button>Reset Password</Button>
                 <StyledParagraph>
-                  Need an account?{' '}
-                  <StyledLink to='/register'>Sign Up</StyledLink>
+                  Click <StyledLink to='/login'>here</StyledLink> to login!
                 </StyledParagraph>
               </Wraper>
             </Form>

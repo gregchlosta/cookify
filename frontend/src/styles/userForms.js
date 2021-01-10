@@ -116,6 +116,12 @@ export const WideWraper = styled.div`
   }
 `
 
+export const LabelWraper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const Message = styled.p`
   color: ${(props) =>
     props.success ? props.theme.success : props.theme.warning};

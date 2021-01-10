@@ -1,5 +1,7 @@
 const User = require('../models/userModel')
+const generatePassword = require('password-generator')
 const generateToken = require('../utils/generateToken')
+const transporter = require('../config/nodemailer')
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -61,6 +63,36 @@ async function registerUser(req, res) {
       })
     } else {
       res.status(400).json({ message: 'Invalid user data' })
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+// @desc    Password reset
+// @route   POST /api/users/reset
+// @access  Public
+async function passwordReset(req, res) {
+  const { email } = req.body
+  try {
+    const user = await User.findOne({ email })
+    const newPassword = generatePassword()
+
+    if (user) {
+      user.password = newPassword
+      await user.save()
+
+      await transporter.sendMail({
+        from: '"Cookify" <support@cookify.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Cookify 🍪 - Account Password Reset', // Subject line
+        text: `Your new password is ${newPassword}`, // plain text body
+        html: `<p>Your new password is <b>${newPassword}</b></p>`, // html body
+      })
+
+      res.status(201).json({ message: `We sent a new password to ${email}` })
+    } else {
+      res.status(404).json({ message: 'User not found' })
     }
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -143,6 +175,7 @@ async function updateUserProfile(req, res) {
 module.exports = {
   authUser,
   registerUser,
+  passwordReset,
   deleteUser,
   getUserProfile,
   updateUserProfile,

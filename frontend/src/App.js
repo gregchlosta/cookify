@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PrivateRoute from './routes/PrivateRoute'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
+import ResetPasswordScreen from './screens/ResetPasswordScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import ItemAddScreen from './screens/ItemAddScreen'
@@ -15,6 +16,7 @@ export default function App() {
       <Switch>
         <Route path='/' component={HomeScreen} exact />
         <Route path='/login' component={LoginScreen} />
+        <Route path='/reset' component={ResetPasswordScreen} />
         <Route path='/register' component={RegisterScreen} />
         <PrivateRoute path='/profile' component={ProfileScreen} />
         <PrivateRoute path='/add' component={ItemAddScreen} />

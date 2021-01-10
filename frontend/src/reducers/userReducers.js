@@ -28,6 +28,19 @@ export function userRegisterReducer(state = {}, action) {
   }
 }
 
+export function userResetPasswordReducer(state = {}, action) {
+  switch (action.type) {
+    case 'USER_RESET_REQUEST':
+      return { loading: true }
+    case 'USER_RESET_SUCCESS':
+      return { loading: false, success: action.payload }
+    case 'USER_RESET_FAIL':
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 export const userDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case 'USER_DELETE_REQUEST':

@@ -5,6 +5,7 @@ const {
   deleteUser,
   getUserProfile,
   updateUserProfile,
+  passwordReset,
 } = require('../controllers/userController')
 const protect = require('../middleware/authMiddleware')
 
@@ -13,6 +14,7 @@ const router = express.Router()
 router.route('/').post(registerUser)
 
 router.route('/login').post(authUser)
+router.route('/reset').post(passwordReset)
 router
   .route('/profile')
   .get(protect, getUserProfile)

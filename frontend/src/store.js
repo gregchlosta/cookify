@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   userLoginReducer,
   userRegisterReducer,
+  userResetPasswordReducer,
   userDeleteReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
@@ -22,6 +23,7 @@ import {
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userResetPassword: userResetPasswordReducer,
   userDelete: userDeleteReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,

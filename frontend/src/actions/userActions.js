@@ -83,6 +83,34 @@ export function register(name, email, password) {
   }
 }
 
+export function resetPassword(email) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: 'USER_RESET_REQUEST',
+      })
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+
+      const { data } = await axios.post('/api/users/reset', { email }, config)
+
+      dispatch({
+        type: 'USER_RESET_SUCCESS',
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'USER_RESET_FAIL',
+        payload: error.response.data.message,
+      })
+    }
+  }
+}
+
 export function deleteUser() {
   return async function (dispatch, getState) {
     try {
