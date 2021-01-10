@@ -6,11 +6,13 @@ Here is a [Live Cookify Demo](https://cookify-greg.herokuapp.com/)
 
 ## Features
 
+- Works on desktop and mobile
 - Full user authnetication and authorization with JWT
+- User profile password reset via email
 - User profile update with image upload.
 - Create, read, update and delete recipe (CRUD)
 - Add and remove recipe likes
-- Comment recipes
+- Add recipe comments
 - Search recipies by keyword
 - Filter recipies by categories
 - List user's recipes, and user's favorite recipies
@@ -24,6 +26,8 @@ NODE_ENV = development
 PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
+EMAIL_LOGIN = email adress, for account password reset
+EMAIL_PASSWORD = email password
 ```
 
 Create a .env file in frontend and add the following

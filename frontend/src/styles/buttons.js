@@ -15,6 +15,10 @@ export const Button = styled.button`
   text-decoration: none;
   outline: none;
 
+  @media (max-width: 600px) {
+    padding: 0.4em 0.7em;
+  }
+
   &:hover,
   &:focus {
     background: ${(props) => props.theme.primaryFaded};

@@ -34,16 +34,16 @@ export default function RecipeLine({ item }) {
       <CellContainer>
         <ItemLink to={`/item/${item._id}`}>{item.title}</ItemLink>
       </CellContainer>
-      <CellContainer>
+      <CellContainerOptional>
         {'published '}
         {formatDistance(new window.Date(item.createdAt), window.Date.now(), {
           addSuffix: true,
         })}
-      </CellContainer>
-      <CellContainer>
+      </CellContainerOptional>
+      <CellContainerOptional>
         <FaHeart size='1.4rem' color='pink' />
         <LikesWrapper>{item.numLikes}</LikesWrapper>
-      </CellContainer>
+      </CellContainerOptional>
       <CellContainer>
         <Button as={Link} to={`/edit/${item._id}`}>
           Edit
@@ -62,6 +62,11 @@ const LineContainer = styled.div`
   grid-template-columns: 1fr 5fr 3fr 0.5fr 1fr 1fr;
   column-gap: 1rem;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr 5fr 1fr 1fr;
+    column-gap: 0.5rem;
+  }
 `
 const Image = styled.img`
   width: 100%;
@@ -80,6 +85,11 @@ const ItemLink = styled(Link)`
 const CellContainer = styled.div`
   display: flex;
   align-items: center;
+`
+const CellContainerOptional = styled(CellContainer)`
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 const LikesWrapper = styled.span`
